@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NAMUH X · 로봇 — 처음 만나는 웰니스 로봇 (Type B)</title>
+<title>NAMUX.COM 리뉴얼 — AS-IS↔TO-BE 비교 데모 (0701)</title>
 
 <link rel="stylesheet" href="_ds/namuh-x-design-system-7766e90e-e112-40a0-bb7f-0cb3e4bb5396/tokens/fonts.css" />
 <link rel="stylesheet" href="_ds/namuh-x-design-system-7766e90e-e112-40a0-bb7f-0cb3e4bb5396/tokens/colors.css" />
@@ -14,31 +14,26 @@
 
 <style>
   html, body { margin: 0; padding: 0; }
-  body { font-family: var(--font-sans); background: #ededed; color: var(--text-body); -webkit-font-smoothing: antialiased; }
-  * { box-sizing: border-box; }
-  a { color: inherit; text-decoration: none; }
-  ::selection { background: var(--ws-mint); color: var(--ws-black); }
-
-  @keyframes tb-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes tb-pop  { from { opacity: 0; transform: scale(.82); } to { opacity: 1; transform: scale(1); } }
-  @keyframes tb-heroRobot { from { opacity: 0; transform: translateY(28px) scale(1.04); } to { opacity: 1; transform: translateY(0) scale(1); } }
-  @keyframes tb-fade { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes tb-modalIn { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
-  @keyframes tb-eq { 0%,100% { transform: scaleY(.92); } 50% { transform: scaleY(.64); } }
-
-  /* reveal-on-scroll */
-  .reveal { opacity: 0; }
-  .reveal.in { animation: tb-rise .8s cubic-bezier(.22,.61,.36,1) both; }
-  .reveal.in.d1 { animation-delay: .08s; }
-  .reveal.in.d2 { animation-delay: .16s; }
-  .reveal.in.d3 { animation-delay: .24s; }
-  .reveal.in.d4 { animation-delay: .32s; }
-  .reveal.in.d5 { animation-delay: .40s; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1 !important; animation: none !important; }
-    .tb-eqbar { animation: none !important; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--surface-page);
+    color: var(--text-body);
+    -webkit-font-smoothing: antialiased;
   }
+  a { color: inherit; }
+  ::selection { background: var(--ws-mint); color: var(--ws-black); }
+  @keyframes hf-pop { from { opacity: 0; transform: translateX(-50%) translateY(-6px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  @keyframes hf-box { 0% { opacity: 0; transform: scale(1.04); } 55% { opacity: 1; } 100% { opacity: 1; transform: scale(1); } }
+  @keyframes hf-mark { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+  @keyframes hf-ring { 0% { transform: scale(.7); opacity: .75; } 70% { transform: scale(1.6); opacity: 0; } 100% { opacity: 0; } }
+  @keyframes rb-cta { 0%,100% { box-shadow: 0 14px 40px rgba(133,225,210,.45); } 50% { box-shadow: 0 16px 52px rgba(133,225,210,.75); } }
+  @keyframes rb-cta-ring { 0% { transform: scale(1); opacity: .55; } 70% { transform: scale(1.18); opacity: 0; } 100% { opacity: 0; } }
+  @keyframes rb-cta-arrow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+  @keyframes rb-pulse { 0% { transform: scale(.82); opacity: 0; } 24% { opacity: .9; } 100% { transform: scale(1.18); opacity: 0; } }
+  @keyframes rb-blink { 0%,92%,100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+  @keyframes rb-scan { 0% { top: 10%; } 50% { top: 86%; } 100% { top: 10%; } }
+  @keyframes rb-rise { from { transform: translateY(4px); opacity: .55; } to { transform: translateY(-3px); opacity: 1; } }
+  @keyframes rb-node { 0% { transform: translate(-50%,-50%) scale(.6); opacity: .35; } 40% { transform: translate(-50%,-50%) scale(1.25); opacity: 1; } 100% { transform: translate(-50%,-50%) scale(1); opacity: .9; } }
 </style>
 </head>
 <body>
@@ -50,6 +45,9 @@
 
 <script src="_ds/namuh-x-design-system-7766e90e-e112-40a0-bb7f-0cb3e4bb5396/_ds_bundle.js"></script>
 
-<script type="text/babel" src="robotB/app.jsx"></script>
+<script type="text/babel" src="src0701/data.jsx"></script>
+<script type="text/babel" src="src0701/screen.jsx"></script>
+<script type="text/babel" src="src0701/robot.jsx"></script>
+<script type="text/babel" src="src0701/app.jsx"></script>
 </body>
 </html>
