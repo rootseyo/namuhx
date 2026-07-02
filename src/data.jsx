@@ -95,6 +95,12 @@
         { label: "신뢰 지표 — 평점 전면화", desc: "리뷰 4.9(9,999) 등 평점·리뷰 수를 전면 노출", box: { x: 2, y: 42, w: 46, h: 4 } },
       ],
     },
+    welcome: {
+      id: "welcome", type: "live",
+      kicker: "로봇 / 처음 만나는 웰니스 로봇",
+      title: "처음 만나는 웰니스 로봇",
+      iframe: "robotB.html",
+    },
     robot: {
       id: "robot", type: "story",
       kicker: "신규 메뉴",
@@ -266,10 +272,10 @@
 
   // GNB 2depth — 스크린샷 IA 기준. desc=설명(기울임), tag=가칭, pre=오픈이후(빨강), xmark=X마크, children=하위
   const GNB = [
-    { name: "로봇", to: "robot", isNew: true, items: [
-      { label: "처음 만나는 웰니스 로봇", desc: "음성대화, Vision AI, 자율주행 등", screen: "robot" },
-      { label: "나를 위한 맞춤 케어", desc: "마이헬스케어, 바이탈, 컴패니언 등" },
+    { name: "웰니스 로봇", to: "robot", isNew: true, items: [
+      { label: "처음 만나는 웰니스 로봇", desc: "음성대화, Vision AI, 자율주행 등", screen: "welcome" },
       { label: "빈틈없는 공간 케어", desc: "에어솔루션, 세이프케어, 라이브뷰 등" },
+      { label: "나를 위한 맞춤 케어", desc: "마이헬스케어, 바이탈, 컴패니언 등" },
       { label: "매일 진화하는 AI", desc: "OTA, 데이터 초 개인화, 생태계 등" },
     ]},
     { name: "스토어", to: "store", items: [

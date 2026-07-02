@@ -458,6 +458,52 @@
 
   }
 
+  /* ---- 라이브 화면 (실제 페이지를 iframe으로 임베드 · TypeB) ---- */
+  function LiveStage({ screen }) {
+    const [full, setFull] = useState(false);
+    React.useEffect(() => {
+      if (!full) return;
+      const onKey = (e) => { if (e.key === "Escape") setFull(false); };
+      window.addEventListener("keydown", onKey);
+      const prev = document.body.style.overflow; document.body.style.overflow = "hidden";
+      return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+    }, [full]);
+    return (
+      <React.Fragment>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
+          <h2 style={{ margin: 0, fontSize: 22, fontWeight: 800, letterSpacing: "-0.02em", color: "var(--text-strong)" }}>{screen.title}</h2>
+          <span style={{ fontSize: 12.5, color: "var(--text-faint)" }}>{screen.kicker}</span>
+        </div>
+        <div style={{ borderRadius: "var(--radius-card)", overflow: "hidden", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-card)", background: "var(--surface-card)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "12px 16px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: "var(--ws-black)", background: "var(--ws-mint)", padding: "3px 10px", borderRadius: 999 }}>리뉴얼</span>
+              <span style={{ fontSize: 12.5, color: "var(--text-muted)" }}>실제 동작 화면</span>
+            </div>
+            <button onClick={() => setFull(true)} style={{ display: "inline-flex", alignItems: "center", gap: 7, cursor: "pointer", padding: "8px 14px", borderRadius: "var(--radius-pill)", border: "1px solid var(--border-default)", background: "var(--surface-card)", color: "var(--text-strong)", fontSize: 13, fontWeight: 700 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3" /></svg>
+              전체화면
+            </button>
+          </div>
+          <iframe title={screen.title} src={screen.iframe} style={{ display: "block", width: "100%", height: "calc(100vh - 210px)", minHeight: 420, border: "none", background: "#ededed" }}></iframe>
+        </div>
+        {full && (
+          <div style={{ position: "fixed", inset: 0, zIndex: 900, background: "#000", display: "flex", flexDirection: "column" }}>
+            <div style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "12px 20px", background: "var(--ws-black)", borderBottom: "1px solid rgba(255,255,255,.1)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, color: "#fff" }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: "var(--ws-black)", background: "var(--ws-mint)", padding: "3px 10px", borderRadius: 999 }}>리뉴얼</span>
+                <strong style={{ fontSize: 15 }}>{screen.title}</strong>
+              </div>
+              <button onClick={() => setFull(false)} aria-label="닫기" style={{ width: 40, height: 40, borderRadius: "50%", cursor: "pointer", background: "rgba(255,255,255,.12)", border: "1px solid rgba(255,255,255,.2)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+              </button>
+            </div>
+            <iframe title={screen.title} src={screen.iframe + "?full=1"} style={{ flex: 1, width: "100%", border: "none", background: "#ededed" }}></iframe>
+          </div>
+        )}
+      </React.Fragment>);
+  }
+
   function App() {
     const [selected, setSelected] = useState("home");
     const [fs, setFs] = useState(null); // { screen, side, setSide }
@@ -469,6 +515,7 @@
     const goStore = () => {setSelected("store");window.scrollTo({ top: 0 });};
 
     let stage;
+    if (screen.type === "live") stage = <LiveStage key={screen.id} screen={screen} />;else
     if (screen.type === "report") stage = <ReportStage key={screen.id} screen={screen} />;else
     if (screen.type === "video") stage = <VideoStage key={screen.id} screen={screen} />;else
     if (screen.type === "page") stage = <PageStage key={screen.id} screen={screen} />;else
